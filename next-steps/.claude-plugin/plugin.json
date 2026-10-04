@@ -1,13 +1,20 @@
 {
   "name": "next-steps",
   "version": "1.0.0",
-  "description": "After each turn, suggests up to three next prompts above the input. Press 1, 2 or 3 to put one in the prompt box as a draft you can edit, 0 to dismiss.",
+  "description": "After a long turn, suggests up to three next prompts above the input. Press 1, 2 or 3 to put one in the prompt box as a draft you can edit, 0 to dismiss.",
   "author": {
     "name": "Thariq Shihipar"
   },
   "license": "MIT",
   "keywords": ["suggestions", "next-steps", "prompt", "function-hooks", "ui"],
   "userConfig": {
+    "minTurnMinutes": {
+      "type": "number",
+      "title": "Shortest turn to suggest after",
+      "description": "Skip suggestions after turns that ran for less than this many minutes.",
+      "required": false,
+      "default": 3
+    },
     "minAnswerChars": {
       "type": "number",
       "title": "Shortest answer to suggest after",

@@ -1,7 +1,7 @@
 /* @jsxRuntime classic */
 /* @jsx h */
 /* @jsxFrag Fragment */
-// next-steps: when a turn ends, fork the session (shares the prompt cache, so
+// next-steps: when a long turn ends, fork the session (shares the prompt cache, so
 // it has full context for the price of one short reply) and ask for up to
 // three likely next prompts. Draw them as 1/2/3 buttons in the band above the
 // composer; a press writes that prompt into the real composer as the person's
@@ -149,6 +149,7 @@ function show($: EngineInterface, nextView: View): void {
 
 export const register: Register = (on, options) => {
   const minTurnChars = typeof options?.minAnswerChars === 'number' ? options.minAnswerChars : 80
+  const minTurnMs = (typeof options?.minTurnMinutes === 'number' ? options.minTurnMinutes : 3) * 60_000
   const suggestsSkills = options?.suggestSkills !== false
 
   // A new turn (typed or otherwise) hides whatever was offered.
@@ -160,7 +161,13 @@ export const register: Register = (on, options) => {
   // Turn over: ask the fork, detached, so the turn's completion never waits on it.
   on('turn.complete', async ($, e, next) => {
     const result = await next(e)
-    if (e.reason !== 'answer' || e.answer.trim().length < minTurnChars) return result
+    if (
+      e.reason !== 'answer' ||
+      e.agentId !== undefined ||
+      e.durationMs < minTurnMs ||
+      e.answer.trim().length < minTurnChars
+    )
+      return result
     const turnId = e.turnId
     show($, { kind: 'loading', turnId })
     void (async () => {

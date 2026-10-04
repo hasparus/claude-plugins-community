@@ -1,6 +1,6 @@
 # next-steps
 
-After each turn, suggests up to three next prompts above the input box.
+After a turn that ran for a while, suggests up to three next prompts above the input box. Quick back-and-forth turns and subagent turns get nothing.
 
 ```
 next:
@@ -30,5 +30,6 @@ Suggestions draw in the terminal. Other surfaces show nothing.
 
 | Option | Default | What it does |
 | --- | --- | --- |
+| `minTurnMinutes` | `3` | Skip suggestions after turns shorter than this |
 | `minAnswerChars` | `80` | Skip suggestions after answers shorter than this |
 | `suggestSkills` | `true` | Tell the suggester which skills and slash commands the session has |

@@ -23930,7 +23930,7 @@
       "name": "next-steps",
       "source": "./next-steps",
       "strict": false,
-      "description": "After each turn, suggests up to three next prompts above the input. Press 1, 2 or 3 to put one in the prompt box as a draft you can edit, 0 to dismiss.",
+      "description": "After a long turn, suggests up to three next prompts above the input. Press 1, 2 or 3 to put one in the prompt box as a draft you can edit, 0 to dismiss.",
       "category": "productivity"
     }
   ]
