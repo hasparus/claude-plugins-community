@@ -1,7 +1,7 @@
 {
   "name": "hasparus-community",
   "owner": {
-    "name": "Anthropic"
+    "name": "hasparus"
   },
   "renames": {
     "qodo-skills": "qodo",
